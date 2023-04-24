@@ -21,10 +21,9 @@ object Day02 {
   }
 
   def main(args: Array[String]): Unit = {
-    val data: Seq[String] = io.Source.fromFile("./src/main/resources/AoC2022/Day02.input").getLines.toSeq
+    val data: Seq[String] = io.Source.fromResource("AoC2022/Day02.input").getLines.toSeq
     println("Part one: " + part1(data))
     println("Part two: " + part2(data))
-
   }
 
 }

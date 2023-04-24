@@ -3,7 +3,7 @@ package AoC2022
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day02Suite extends AnyFunSuite {
-  val test_data: Seq[String] = io.Source.fromFile("./src/test/resources/AoC2022/Day02.input").getLines.toSeq
+  val test_data: Seq[String] = io.Source.fromResource("AoC2022/Day02.input").getLines.toSeq
   test("Part1 sample input") {
     assert(Day02.part1(test_data) == 15)
   }

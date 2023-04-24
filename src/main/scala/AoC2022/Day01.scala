@@ -17,7 +17,7 @@ object Day01 {
   def part2(input: String): Int = parse(input).sorted.takeRight(3).sum
 
   def main(args: Array[String]): Unit = {
-    val data: String = io.Source.fromFile("./src/main/resources/AoC2022/Day01.input").mkString
+    val data: String = io.Source.fromResource("AoC2022/Day01.input").mkString
 
     println("Part1: " + part1(data))
     println("Part2: " + part2(data))
