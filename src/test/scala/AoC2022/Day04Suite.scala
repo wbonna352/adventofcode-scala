@@ -4,6 +4,7 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class Day04Suite extends AnyFunSuite {
   val test_data: String = io.Source.fromResource("AoC2022/Day04.input").mkString
+  val final_data: String = io.Source.fromFile("./src/main/resources/AoC2022/Day04.input").mkString
   test("Part1 sample input") {
     assert(Day04.part1(test_data) == 2)
   }
@@ -13,13 +14,11 @@ class Day04Suite extends AnyFunSuite {
   }
 
   test("Part1 final input") {
-    val data: String = io.Source.fromFile("./src/main/resources/AoC2022/Day04.input").mkString
-    assert(Day04.part1(data) == 651)
+    assert(Day04.part1(final_data) == 651)
   }
 
   test("Part2 final input") {
-    val data: String = io.Source.fromFile("./src/main/resources/AoC2022/Day04.input").mkString
-    assert(Day04.part2(data) == 956)
+    assert(Day04.part2(final_data) == 956)
   }
 
   }
