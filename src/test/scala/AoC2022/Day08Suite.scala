@@ -10,12 +10,12 @@ class Day08Suite extends AnyFunSuite {
     assert(Day08.part1(test_data) == 21)
   }
 
-//  test("Part2 sample input") {
-//    assert(Day08.part2(test_data) == 1703)
-//  }
+  test("Part2 sample input") {
+    assert(Day08.part2(test_data) == 8)
+  }
 
   test("Part1 final input") {
-    assert(Day08.part1(final_data) == 1297159)
+    assert(Day08.part1(final_data) == 1703)
   }
 
   test("Part2 final input") {
