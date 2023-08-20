@@ -1,5 +1,7 @@
 package AoC2022
 
+import scala.annotation.tailrec
+
 object Day09 {
 
   import Direction.*
@@ -38,27 +40,50 @@ object Day09 {
     }
   }
 
-  case class Rope(head: Position, tail: Position) {
+  case class Rope(knots: Seq[Position]) {
+
+    def tail: Position = knots.last
+
     def planckMove(direction: Direction): Rope = {
-      val newHead = head.move(direction)
-      val newTail = tail.planckFollow(newHead)
-      Rope(newHead, newTail)
+
+      @tailrec
+      def runner(knotsAfter: Seq[Position], knotsCurrent: Seq[Position]): Seq[Position] = {
+        if (knotsCurrent.isEmpty) knotsAfter
+        else {
+          val runHead = knotsAfter.last
+          val runTail = knotsCurrent.head
+
+          runner(knotsAfter :+ runTail.planckFollow(runHead), knotsCurrent.tail)
+        }
+      }
+
+      Rope(runner(Seq() :+ knots.head.move(direction), knots.tail))
     }
   }
 
   def part1(input: Seq[String]): Int = {
     val motions = parse(input)
     val moves = motions.flatMap(_.moves)
-    val start = Rope(Position(), Position())
+    val start = Rope(Seq.fill(2)(Position()))
 
-    val finalRope = moves.scanLeft(start)((rope: Rope, d: Direction) => rope.planckMove(d))
-    finalRope.map(_.tail).distinct.length
+    val ropes: Seq[Rope] = moves.scanLeft(start)((rope: Rope, d: Direction) => rope.planckMove(d))
+    ropes.map(_.tail).distinct.length
+  }
+
+  def part2(input: Seq[String]): Int = {
+    val motions = parse(input)
+    val moves = motions.flatMap(_.moves)
+    val start = Rope(Seq.fill(10)(Position()))
+
+    val ropes: Seq[Rope] = moves.scanLeft(start)((rope: Rope, d: Direction) => rope.planckMove(d))
+    ropes.map(_.tail).distinct.length
   }
 
   def main(args: Array[String]): Unit = {
     val input: Seq[String] = io.Source.fromResource("AoC2022/Day09.input").getLines().toSeq
 
     println("Part one: " + part1(input))
+    println("Part two: " + part2(input))
 
   }
 
